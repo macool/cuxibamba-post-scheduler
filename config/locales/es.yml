@@ -1,0 +1,8 @@
+es:
+  ui:
+    welcome: Bienvenido, %{name}
+    error:
+      cant_authorize: Ups! algo salió mal
+    post:
+      created: Post guardado!
+      cant_create: Ups, error al crear %{reason}

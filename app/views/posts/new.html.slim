@@ -1,0 +1,10 @@
+h1 Nuevo Post
+
+= form_for @post do |f|
+  = f.label :share_at
+  = f.date_field :share_at, required: true
+
+  = f.label :content
+  = f.text_area :content, required: true
+
+  = f.submit

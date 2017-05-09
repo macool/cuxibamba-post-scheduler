@@ -1,0 +1,12 @@
+- if current_user
+  p
+    ' olah
+    = current_user.info["nickname"]
+
+  = link_to "Nueva publicación", new_post_path
+
+  = render @posts
+- else
+  p
+    please login!
+    = link_to "using twitter", user_twitter_omniauth_authorize_path
