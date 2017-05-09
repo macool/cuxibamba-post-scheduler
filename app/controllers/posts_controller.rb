@@ -28,6 +28,13 @@ class PostsController < ApplicationController
 
   private
 
+  def mapped_external_providers
+    Wuxi::ExternalProvider.all.map do |external_provider|
+      [ external_provider.place, external_provider.id ]
+    end
+  end
+  helper_method :mapped_external_providers
+
   def post_params
     params.require(:post).permit(:share_at, :content)
   end

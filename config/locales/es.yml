@@ -13,10 +13,17 @@ es:
   devise:
     failure:
       user:
-        unauthenticated: inicia sesión
+        unauthenticated: por favor inicia sesión
   posts:
     index:
       future_posts: Future posts
+    new:
+      title: publicación nueva
+      external_provider: lugar de publicación
+      content: contenido de la publicación (soporta markdown)
+      share_at: fecha de publicación
+      preview: previsualizar
+      submit_form: programar publicación
   home:
     welcome:
       header: welcome!

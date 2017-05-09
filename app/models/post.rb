@@ -8,6 +8,7 @@ class Post
   field :content, type: String
   field :published_at, type: Time
   field :tweet_id, type: String
+  field :external_provider_id, type: String
   belongs_to :user
 
   index({ published_at: 1 })

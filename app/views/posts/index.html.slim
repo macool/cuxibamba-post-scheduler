@@ -2,4 +2,6 @@
   h3.ui.header = t('.future_posts')
   = render partial: 'post', collection: @posts
 
-= link_to "Nueva publicación", new_post_path
+.new-post-link-btn
+  = link_to new_post_path do
+    i.icon.plus.circular.teal.inverted
