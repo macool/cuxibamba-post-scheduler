@@ -10,10 +10,14 @@
   </head>
 
   <body>
+    <!-- TODO handle better -->
     <% flash.each do |key, message| %>
       <%= message %>
     <% end %>
 
-    <%= yield %>
+    <div class="body-content-wrapper">
+      <%= semantic_breadcrumbs %>
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,0 +1,9 @@
+.welcome-page
+  h1 = t('.header')
+
+  p.main-intro = t('.main_intro').html_safe
+
+  p.login-section
+    = link_to user_twitter_omniauth_authorize_path do
+      i.icon.twitter
+      span = t('.login')

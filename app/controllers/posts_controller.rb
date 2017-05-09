@@ -1,13 +1,17 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!,
-                only: [:new, :create]
+                only: [:index, :new, :create]
+
+  semantic_breadcrumb :index, :posts_path
+
   def index
-    @posts = Post.all
+    @posts = Post.all.decorate
   end
 
   def new
     @post = Post.new
     authorize @post
+    semantic_breadcrumb :new, :new_post_path
   end
 
   def create

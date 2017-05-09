@@ -1,1 +1,19 @@
-div = post.inspect
+.event
+  .label
+    = image_tag post.user.image
+  .content
+    .summary
+      = post.user.name
+      .date 2017-05-08
+    .extra.text
+      = post.content
+    .meta
+      span
+        i.icon.send
+        | @cuxibamba
+      span
+        i.icon.retweet
+        | reposted 10 minutes ago
+      span
+        i.icon.child
+        = rand 100

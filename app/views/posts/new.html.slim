@@ -1,10 +1,13 @@
-h1 Nuevo Post
+h2.ui.header Nuevo Post
 
-= form_for @post do |f|
-  = f.label :share_at
-  = f.date_field :share_at, required: true
+= form_for @post, html: { class: "ui form" } do |f|
+  .field
+    = f.label :share_at
+    = f.date_field :share_at, required: true
 
-  = f.label :content
-  = f.text_area :content, required: true
+  .field
+    = f.label :content
+    = f.text_area :content, required: true
 
-  = f.submit
+  .form-actions
+    = f.submit class: "ui primary button"
