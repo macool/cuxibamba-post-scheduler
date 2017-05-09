@@ -8,13 +8,18 @@ class Post
   field :content, type: String
   field :published_at, type: Time
   field :tweet_id, type: String
+  field :target_link, type: String
   field :external_provider_id, type: String
+  field :reposted_at, type: Time
+  field :reposted_external_id, type: String
   belongs_to :user
 
   index({ published_at: 1 })
   index({ tweet_id: 1 }, { unique: true })
 
-  validates :content, presence: true
+  validates :content,
+            :external_provider_id,
+            presence: true
   validates :share_at, presence: true, future: true
 
   scope :fifo, -> { order(created_at: :asc) }

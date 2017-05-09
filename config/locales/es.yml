@@ -16,7 +16,7 @@ es:
         unauthenticated: por favor inicia sesión
   posts:
     index:
-      future_posts: Future posts
+      future_posts: future posts
     new:
       title: publicación nueva
       external_provider: lugar de publicación
@@ -24,6 +24,7 @@ es:
       share_at: fecha de publicación
       preview: previsualizar
       submit_form: programar publicación
+      target_link: 'enlace objetivo (opcional)'
   home:
     welcome:
       header: welcome!

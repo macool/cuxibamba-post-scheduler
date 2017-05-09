@@ -4,16 +4,23 @@
   .content
     .summary
       = post.user.name
-      .date 2017-05-08
+      .date = post.share_at
     .extra.text
       = post.content
+    - if post.target_link.present?
+      .extra.text
+        = link_to post.target_link, post.target_link, target: "_blank"
     .meta
-      span
+      = link_to post.decorated_external_provider.external_link,
+                target: "_blank",
+                class: "" do
         i.icon.send
-        | @cuxibamba
-      span
-        i.icon.retweet
-        | reposted 10 minutes ago
+        = post.decorated_external_provider.nickname
+
+      - if false # TODO
+        span
+          i.icon.retweet
+          | reposted 10 minutes ago
       span
         i.icon.child
-        = rand 100
+        = rand 10

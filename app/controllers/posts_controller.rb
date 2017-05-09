@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   semantic_breadcrumb :index, :posts_path
 
   def index
-    @posts = Post.all.decorate
+    @posts = Post.fifo.decorate
   end
 
   def new
@@ -36,6 +36,11 @@ class PostsController < ApplicationController
   helper_method :mapped_external_providers
 
   def post_params
-    params.require(:post).permit(:share_at, :content)
+    params.require(:post).permit(
+      :share_at,
+      :content,
+      :external_provider_id,
+      :target_link
+    )
   end
 end

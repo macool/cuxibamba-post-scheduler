@@ -1,3 +1,5 @@
 class Wuxi::ExternalProvider < Wuxi::BaseResource
-  cached_resource collection_synchronize: true
+  unless Rails.env.development?
+    cached_resource collection_synchronize: true
+  end
 end

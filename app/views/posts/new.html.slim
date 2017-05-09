@@ -10,12 +10,17 @@ h2.ui.header = t(".title")
   .field
     = f.text_area :content,
                   placeholder: t(".content"),
-                  required: true
+                  required: true,
+                  rows: 5
 
   .field
     = f.date_field :share_at,
                    placeholder: t(".share_at"),
                    required: true
+
+  .field
+    = f.text_field :target_link,
+                   placeholder: t(".target_link")
 
   .form-actions
     = link_to t('.preview'),
