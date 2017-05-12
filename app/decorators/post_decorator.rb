@@ -5,6 +5,24 @@ class PostDecorator < ApplicationDecorator
     @decorated_external_provider ||= ::Wuxi::ExternalProviderDecorator.new(external_provider)
   end
 
+  def json_for_api
+    {
+      id: object.id.to_s,
+      created_at: object.created_at,
+      target_link: object.target_link,
+      share_at: object.share_at.to_date,
+      external_provider_id: object.external_provider_id,
+      repost_content: repost_content,
+      tweet_id: object.tweet_id,
+      published_at: object.published_at
+    }
+  end
+
+  def repost_content
+    # TODO revise
+    "#{object.content}\nvía @#{user.nickname}"
+  end
+
   private
 
   def external_provider

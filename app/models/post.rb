@@ -4,14 +4,16 @@ class Post
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  API_PERMITTED_PARAMS = [
+    :tweet_id, :published
+  ].freeze
+
   field :share_at, type: Date
   field :content, type: String
   field :published_at, type: Time
   field :tweet_id, type: String
   field :target_link, type: String
   field :external_provider_id, type: String
-  field :reposted_at, type: Time
-  field :reposted_external_id, type: String
   belongs_to :user
 
   index({ published_at: 1 })
@@ -23,11 +25,17 @@ class Post
   validates :share_at, presence: true, future: true
 
   scope :fifo, -> { order(created_at: :asc) }
+  scope :unpublished, -> { where(published_at: nil) }
+  scope :repost_today, -> {
+    where(share_at: Time.zone.now.to_date)
+  }
+  scope :for_external_provider, ->(external_provider_id) {
+    where(external_provider_id: external_provider_id)
+  }
 
-  def self.next_in_queue
-    fifo.where(
-      published_at: nil,
-      share_at: Time.zone.now.to_date
-    ).first
+  def published=(value)
+    if value.present?
+      self.published_at = Time.now
+    end
   end
 end
