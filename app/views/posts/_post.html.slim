@@ -1,1 +1,26 @@
-div = post.inspect
+.event
+  .label
+    = image_tag post.user.image
+  .content
+    .summary
+      = post.user.name
+      .date = post.share_at
+    .extra.text
+      = post.content
+    - if post.target_link.present?
+      .extra.text
+        = link_to post.target_link, post.target_link, target: "_blank"
+    .meta
+      = link_to post.decorated_external_provider.external_link,
+                target: "_blank",
+                class: "" do
+        i.icon.send
+        = post.decorated_external_provider.nickname
+
+      - if false # TODO
+        span
+          i.icon.retweet
+          | reposted 10 minutes ago
+      span
+        i.icon.child
+        = rand 10

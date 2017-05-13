@@ -1,13 +1,17 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!,
-                only: [:new, :create]
+                only: [:index, :new, :create]
+
+  semantic_breadcrumb :index, :posts_path
+
   def index
-    @posts = Post.all
+    @posts = Post.fifo.decorate
   end
 
   def new
     @post = Post.new
     authorize @post
+    semantic_breadcrumb :new, :new_post_path
   end
 
   def create
@@ -24,7 +28,19 @@ class PostsController < ApplicationController
 
   private
 
+  def mapped_external_providers
+    Wuxi::ExternalProvider.all.map do |external_provider|
+      [ external_provider.place, external_provider.id ]
+    end
+  end
+  helper_method :mapped_external_providers
+
   def post_params
-    params.require(:post).permit(:share_at, :content)
+    params.require(:post).permit(
+      :share_at,
+      :content,
+      :external_provider_id,
+      :target_link
+    )
   end
 end

@@ -6,3 +6,27 @@ es:
     post:
       created: Post guardado!
       cant_create: Ups, error al crear %{reason}
+  breadcrumbs:
+    posts:
+      index: mis publicaciones
+      new: nueva
+  devise:
+    failure:
+      user:
+        unauthenticated: por favor inicia sesión
+  posts:
+    index:
+      future_posts: future posts
+    new:
+      title: publicación nueva
+      external_provider: lugar de publicación
+      content: contenido de la publicación (soporta markdown)
+      share_at: fecha de publicación
+      preview: previsualizar
+      submit_form: programar publicación
+      target_link: 'enlace objetivo (opcional)'
+  home:
+    welcome:
+      header: welcome!
+      main_intro: "we can help you to <span class='switchable'>echo</span> your posts"
+      login: autentificarse

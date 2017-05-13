@@ -4,6 +4,10 @@ Rails.application.routes.draw do
              controllers: {
                omniauth_callbacks: "users/omniauth_callbacks"
              }
-  root "posts#index"
+  namespace :api do
+    resources :posts,
+              only: [:index, :show, :update]
+  end
+  root "home#welcome"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

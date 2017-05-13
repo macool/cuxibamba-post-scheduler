@@ -1,10 +1,30 @@
-h1 Nuevo Post
+h2.ui.header = t(".title")
 
-= form_for @post do |f|
-  = f.label :share_at
-  = f.date_field :share_at, required: true
+= form_for @post, html: { class: "ui form" } do |f|
+  .field
+    = f.select :external_provider_id,
+               mapped_external_providers,
+               { include_blank: t('.external_provider') },
+               required: true
 
-  = f.label :content
-  = f.text_area :content, required: true
+  .field
+    = f.text_area :content,
+                  placeholder: t(".content"),
+                  required: true,
+                  rows: 5
 
-  = f.submit
+  .field
+    = f.date_field :share_at,
+                   placeholder: t(".share_at"),
+                   required: true
+
+  .field
+    = f.text_field :target_link,
+                   placeholder: t(".target_link")
+
+  .form-actions
+    = link_to t('.preview'),
+              '#',
+              class: "ui basic button"
+    = f.submit t('.submit_form'),
+               class: "ui primary button"
