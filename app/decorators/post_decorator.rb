@@ -41,6 +41,10 @@ class PostDecorator < ApplicationDecorator
     )
   end
 
+  def visits_count
+    object.post_visits.count
+  end
+
   private
 
   def external_provider

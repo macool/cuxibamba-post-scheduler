@@ -11,5 +11,4 @@ class PostVisit
 
   validates :post,
             presence: true
-
 end

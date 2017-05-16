@@ -10,19 +10,20 @@
     - if post.target_link.present?
       .extra.text
         = link_to post.target_link, post.target_link, target: "_blank"
-    .meta
-      = link_to post.decorated_external_provider.external_link,
-                target: "_blank",
-                class: "" do
-        i.icon.send
-        = post.decorated_external_provider.nickname
+    - if !defined?(simple_ui)
+      .meta
+        = link_to post.decorated_external_provider.external_link,
+                  target: "_blank",
+                  class: "" do
+          i.icon.send
+          = post.decorated_external_provider.nickname
 
-      - if post.reposted?
-        = link_to post.repost_url,
-                  target: "_blank" do
-          i.icon.retweet
-          => t(".reposted_at")
-          = time_ago_in_words post.published_at
-      span
-        i.icon.child
-        | 0
+        - if post.reposted?
+          = link_to post.repost_url,
+                    target: "_blank" do
+            i.icon.retweet
+            => t(".reposted_at")
+            = time_ago_in_words post.published_at
+        span
+          i.icon.child
+          = post.visits_count

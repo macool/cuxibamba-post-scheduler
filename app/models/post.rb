@@ -14,7 +14,9 @@ class Post
   field :tweet_id, type: String
   field :target_link, type: String
   field :external_provider_id, type: String
+
   belongs_to :user
+  has_many :post_visits
 
   index({ published_at: 1 })
   index({ tweet_id: 1 }, { unique: true })
