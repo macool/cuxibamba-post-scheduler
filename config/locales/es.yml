@@ -82,6 +82,14 @@ es:
     errors:
       messages:
         blank_in_locale: "No puede ser vacio"
+        message_title: "message"
+        summary_title: "summary"
+        resolution_title: "resolution"
+        validations:
+          message: "Validation of %{document} failed."
+          summary: "The following errors were found: %{errors}"
+          resolution: "Try persisting the document with valid data or remove
+            the validations."
       models:
         post:
           attributes:
