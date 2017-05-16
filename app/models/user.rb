@@ -1,5 +1,7 @@
 class User
   include Mongoid::Document
+  extend Enumerize
+
   devise :trackable, :omniauthable, omniauth_providers: [:twitter]
 
   field :uid, type: String
@@ -10,6 +12,9 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
+  field :plan,               type: String
+
+  enumerize :plan, in: [:standard, :premium], default: :standard
 
   index({ uid: 1 }, { unique: true })
 

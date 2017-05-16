@@ -20,12 +20,25 @@ class PostDecorator < ApplicationDecorator
 
   def repost_content
     # TODO revise
-    "#{object.content}\nvía @#{user.nickname}"
+    content = object.content
+    content += " #{sharing_url}"
+    if user.plan.standard?
+      content += "\nvía @#{user.nickname}"
+    end
+    content
   end
 
   def repost_url
     base = decorated_external_provider.external_link
     "#{base}/status/#{tweet_id}"
+  end
+
+  def sharing_url
+    host = Rails.application.secrets.app_url
+    host + h.consume_post_visit_path(
+      post_id: id,
+      user_id: user.id
+    )
   end
 
   private
