@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   semantic_breadcrumb :index, :posts_path
 
   def index
-    @posts = Post.fifo.decorate
+    @future_posts = Post.unpublished.fifo.from_user(current_user).decorate
+    @latest_posts = Post.published.last_published.decorate
   end
 
   def new

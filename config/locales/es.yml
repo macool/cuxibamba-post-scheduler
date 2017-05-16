@@ -8,15 +8,21 @@ es:
       cant_create: Ups, error al crear %{reason}
   breadcrumbs:
     posts:
-      index: mis publicaciones
+      index: publicaciones
       new: nueva
   devise:
     failure:
       user:
         unauthenticated: por favor inicia sesión
   posts:
+    post:
+      reposted_at: publicado hace
     index:
-      future_posts: future posts
+      future_posts: programadas
+      latest_posts: publicadas recientemente
+      future_posts_suggestion:
+        title: no has creado publicaciones
+        message: ¡programa una publicación nueva!
     new:
       title: publicación nueva
       external_provider: lugar de publicación
@@ -30,3 +36,42 @@ es:
       header: welcome!
       main_intro: "we can help you to <span class='switchable'>echo</span> your posts"
       login: autentificarse
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: alrededor de 1 hora
+        other: alrededor de %{count} horas
+      about_x_months:
+        one: alrededor de 1 mes
+        other: alrededor de %{count} meses
+      about_x_years:
+        one: alrededor de 1 año
+        other: alrededor de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: "%{count} días"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_months:
+        one: 1 mes
+        other: "%{count} meses"
+      x_years:
+        one: 1 año
+        other: "%{count} años"
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"

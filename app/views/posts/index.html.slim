@@ -1,7 +1,27 @@
-.ui.feed
-  h3.ui.header = t('.future_posts')
-  = render partial: 'post', collection: @posts
+.posts-wrapper
+  - if @future_posts.any?
+    .ui.feed
+      h2.ui.header = t('.future_posts')
+      = render partial: 'post', collection: @future_posts
 
-.new-post-link-btn
-  = link_to new_post_path do
-    i.icon.plus.circular.teal.inverted
+    .new-post-link-btn.inverse-margin
+      = link_to new_post_path do
+        = render "new_post_btn"
+
+  - else
+    = link_to new_post_path,
+              class: "ui message icon no-posts-message" do
+      .content
+        .header = t(".future_posts_suggestion.title")
+        p = t(".future_posts_suggestion.message")
+      = render "new_post_btn"
+
+  - if @latest_posts.any?
+    .ui.feed
+      h2.ui.header = t(".latest_posts")
+      = render partial: 'post', collection: @latest_posts
+
+  - if @latest_posts.size > 3
+    .new-post-link-btn
+      = link_to new_post_path do
+        = render "new_post_btn"

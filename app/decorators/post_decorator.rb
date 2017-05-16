@@ -23,6 +23,11 @@ class PostDecorator < ApplicationDecorator
     "#{object.content}\nvía @#{user.nickname}"
   end
 
+  def repost_url
+    base = decorated_external_provider.external_link
+    "#{base}/status/#{tweet_id}"
+  end
+
   private
 
   def external_provider

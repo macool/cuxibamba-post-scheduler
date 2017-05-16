@@ -17,10 +17,12 @@
         i.icon.send
         = post.decorated_external_provider.nickname
 
-      - if false # TODO
-        span
+      - if post.reposted?
+        = link_to post.repost_url,
+                  target: "_blank" do
           i.icon.retweet
-          | reposted 10 minutes ago
+          => t(".reposted_at")
+          = time_ago_in_words post.published_at
       span
         i.icon.child
-        = rand 10
+        | 0
