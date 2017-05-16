@@ -1,29 +1,30 @@
-.event
+.event.post-view
   .label
     = image_tag post.user.image
   .content
     .summary
       = post.user.name
-      .date = post.share_at
-    .extra.text
-      = post.content
+      = link_to post.sharing_url, class: "date" do
+        = post.share_at
+    .extra.text.content
+      = post.limited_content.html_safe
     - if post.target_link.present?
       .extra.text
         = link_to post.target_link, post.target_link, target: "_blank"
-    - if !defined?(simple_ui)
-      .meta
-        = link_to post.decorated_external_provider.external_link,
-                  target: "_blank",
-                  class: "" do
-          i.icon.send
-          = post.decorated_external_provider.nickname
 
-        - if post.reposted?
-          = link_to post.repost_url,
-                    target: "_blank" do
-            i.icon.retweet
-            => t(".reposted_at")
-            = time_ago_in_words post.published_at
-        span
-          i.icon.child
-          = post.visits_count
+    .meta
+      = link_to post.decorated_external_provider.external_link,
+                target: "_blank",
+                class: "" do
+        i.icon.send
+        = post.decorated_external_provider.nickname
+
+      - if post.reposted?
+        = link_to post.repost_url,
+                  target: "_blank" do
+          i.icon.retweet
+          => t(".reposted_at")
+          = time_ago_in_words post.published_at
+      span
+        i.icon.child
+        = post.visits_count

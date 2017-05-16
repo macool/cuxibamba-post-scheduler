@@ -1,2 +1,17 @@
-.ui.feed
-  = render "posts/post", post: @post.decorate, simple_ui: true
+- if @post.published_at.blank?
+  .ui.message
+    = t(".post_not_published_warning")
+
+.ui.feed.post-show-view
+  .event
+    .label
+      = image_tag @post.user.image
+    .content
+      .summary
+        = @post.user.name
+        .date = @post.share_at
+      .extra.text.content
+        = @post.parsed_content.html_safe
+      - if @post.target_link.present?
+        .extra.text
+          = link_to @post.target_link, @post.target_link, target: "_blank"

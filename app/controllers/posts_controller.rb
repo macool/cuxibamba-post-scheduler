@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
     authorize @post
     if @post.save
-      flash[:success] = t("ui.post.created")
+      flash[:success] = t("ui.post.created", date: @post.share_at.to_s)
       redirect_to action: :index
     else
       flash[:error] = t("ui.post.cant_create", reason: @post.errors.full_messages.join(", "))

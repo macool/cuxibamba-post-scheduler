@@ -45,7 +45,23 @@ class PostDecorator < ApplicationDecorator
     object.post_visits.count
   end
 
+  def parsed_content
+    markdown content
+  end
+
+  def limited_content
+    h.strip_tags(
+      markdown(
+        h.truncate(content, length: 140, separator: ' ')
+      )
+    )
+  end
+
   private
+
+  def markdown(text)
+    Kramdown::Document.new(text).to_html
+  end
 
   def external_provider
     if external_provider_id.present?

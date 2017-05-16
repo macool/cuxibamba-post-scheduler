@@ -5,6 +5,8 @@ class PostVisitsController < ApplicationController
 
     log_visit!
 
+    @post = @post.decorate
+
     if @user.plan.premium? && @post.target_link.present?
       redirect_to @post.target_link
     end
@@ -14,6 +16,10 @@ class PostVisitsController < ApplicationController
 
   def log_visit!
     if session[:visited_posts] && session[:visited_posts].include?(@post.id.to_s)
+      return false
+    end
+
+    if current_user && @post.user == current_user
       return false
     end
 

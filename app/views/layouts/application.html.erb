@@ -10,10 +10,7 @@
   </head>
 
   <body>
-    <!-- TODO handle better -->
-    <% flash.each do |key, message| %>
-      <%= message %>
-    <% end %>
+    <%= render "shared/flashes" %>
 
     <div class="body-content-wrapper">
       <%= semantic_breadcrumbs %>

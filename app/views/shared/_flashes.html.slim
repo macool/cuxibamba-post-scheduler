@@ -1,0 +1,4 @@
+.flash-messages.auto-noty
+  - flash.each do |key, message|
+    .flash-message data-kind="#{key}"
+      = message.html_safe
