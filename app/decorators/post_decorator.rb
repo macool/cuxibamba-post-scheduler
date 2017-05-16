@@ -21,7 +21,7 @@ class PostDecorator < ApplicationDecorator
   def repost_content
     # TODO revise
     content = object.content
-    content += " #{sharing_url}"
+    content += "\n#{sharing_url}"
     if user.plan.standard?
       content += "\nvía @#{user.nickname}"
     end
