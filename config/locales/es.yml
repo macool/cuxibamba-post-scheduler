@@ -6,6 +6,7 @@ es:
     post:
       created: publicación programada para el %{date}
       cant_create: ups, error al crear:<br>%{reason}
+      not_allowed: ups! por ahora sólo puedes programar hasta %{count} publicaciones
   breadcrumbs:
     posts:
       index: publicaciones

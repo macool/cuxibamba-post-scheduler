@@ -10,9 +10,16 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
-    authorize @post
     semantic_breadcrumb :new, :new_post_path
+    @post = Post.new
+    post_policy = policy(@post)
+    unless post_policy.new?
+      flash[:error] = t(
+        "ui.post.not_allowed",
+        count: post_policy.class::MAX_POSTS_ALLOWED_FOR_STANDARD_USER
+      )
+      return redirect_to action: :index
+    end
   end
 
   def create
