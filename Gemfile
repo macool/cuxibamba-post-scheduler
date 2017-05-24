@@ -46,6 +46,7 @@ gem 'cached_resource'
 gem 'lograge'
 gem 'enumerize'
 gem 'kramdown'
+gem 'dotenv-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
