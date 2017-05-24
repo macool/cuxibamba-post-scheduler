@@ -151,6 +151,7 @@ production:
     default:
       uri: <%= ENV["MONGODB_URI"] %>
       options:
+        max_pool_size: 50
         connect_timeout: 20
   options:
     preload_models: true
