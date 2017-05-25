@@ -1,6 +1,12 @@
 class PostDecorator < ApplicationDecorator
   decorates_association :user
 
+  ##
+  # see t.co length
+  # https://dev.twitter.com/basics/tco#will-t-co-wrapped-links-always-be-the-same-length
+  SHARING_URL_LENGTH = 25
+  TWITTER_MAX_LENGTH = 140
+
   def decorated_external_provider
     @decorated_external_provider ||= ::Wuxi::ExternalProviderDecorator.new(external_provider)
   end
@@ -19,13 +25,20 @@ class PostDecorator < ApplicationDecorator
   end
 
   def repost_content
-    # TODO revise
-    content = object.content
+    max_length = TWITTER_MAX_LENGTH - SHARING_URL_LENGTH - content_footer.length
+    content = stripped_content(max_length: max_length)
     content += "\n#{sharing_url}"
-    if user.plan.standard?
-      content += "\nvía @#{user.nickname}"
-    end
+    content += content_footer
     content
+  end
+
+  def content_footer
+    if user.plan.standard?
+      "\nvía @#{user.nickname}"
+    else
+      # no footer (leave for more user chars)
+      ""
+    end
   end
 
   def repost_url
@@ -46,14 +59,15 @@ class PostDecorator < ApplicationDecorator
   end
 
   def parsed_content
-    markdown content
+    markdown(content).chomp
   end
 
-  def limited_content
-    h.strip_tags(
-      markdown(
-        h.truncate(content, length: 140, separator: ' ')
-      )
+  def stripped_content(max_length: TWITTER_MAX_LENGTH)
+    h.truncate(
+      h.strip_tags(parsed_content),
+      length: max_length,
+      separator: ' ',
+      omission: '..'
     )
   end
 

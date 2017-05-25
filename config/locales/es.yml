@@ -14,7 +14,7 @@ es:
   devise:
     failure:
       user:
-        unauthenticated: por favor inicia sesión
+        unauthenticated: ups! por favor inicia sesión
   posts:
     post:
       reposted_at: publicado hace

@@ -7,7 +7,7 @@
       = link_to post.sharing_url, class: "date" do
         = post.share_at
     .extra.text.content
-      = post.limited_content.html_safe
+      = post.stripped_content.html_safe
     - if post.target_link.present?
       .extra.text
         = link_to post.target_link, post.target_link, target: "_blank"
