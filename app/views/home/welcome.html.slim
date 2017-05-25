@@ -1,7 +1,8 @@
 .welcome-page
   h1 = t('.header')
 
-  p.main-intro = t('.main_intro').html_safe
+  p.main-intro data-switchables="#{t('.intro_switchables')}"
+    = t('.main_intro').html_safe
 
   p.login-section
     = link_to user_twitter_omniauth_authorize_path do
