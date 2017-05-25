@@ -11,6 +11,10 @@ class PostPolicy < ApplicationPolicy
     )
   end
 
+  def destroy?
+    !record.reposted? && owned_by_user?
+  end
+
   def load_errors_in_post!
     if already_scheduled_for_date?
       record.errors.add(:share_at, :already_scheduled_for_date, date: record.share_at.to_date)
@@ -18,6 +22,10 @@ class PostPolicy < ApplicationPolicy
   end
 
   private
+
+  def owned_by_user?
+    record.user == user
+  end
 
   def already_scheduled_for_date?
     record.share_at.present? && user.posts.for_date(record.share_at).exists?

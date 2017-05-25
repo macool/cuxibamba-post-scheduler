@@ -5,6 +5,7 @@ es:
       cant_authorize: Ups! algo salió mal
     post:
       created: publicación programada para el %{date}
+      destroyed: publicación eliminada
       cant_create: ups, error al crear:<br>%{reason}
       not_allowed: ups! por ahora sólo puedes programar hasta %{count} publicaciones
   breadcrumbs:

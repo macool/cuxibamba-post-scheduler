@@ -28,3 +28,9 @@
       span
         i.icon.child
         = post.visits_count
+
+      - if policy(post).destroy?
+        = link_to post_path(post),
+                  method: :delete,
+                  class: "span" do
+          i.icon.trash

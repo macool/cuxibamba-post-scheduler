@@ -36,6 +36,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = current_user.posts.find(params[:id])
+    authorize @post
+    @post.destroy
+    flash[:success] = t("ui.post.destroyed")
+    redirect_to action: :index
+  end
+
   private
 
   def post_policy
