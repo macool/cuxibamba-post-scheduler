@@ -30,9 +30,8 @@ class Post
   scope :fifo, -> { order(created_at: :asc) }
   scope :published, -> { where(:published_at.ne => nil) }
   scope :unpublished, -> { where(published_at: nil) }
-  scope :repost_today, -> {
-    where(share_at: Time.zone.now.to_date)
-  }
+  scope :repost_today, -> { for_date(Time.zone.now) }
+  scope :for_date, ->(date) { where(share_at: date.to_date) }
   scope :for_external_provider, ->(external_provider_id) {
     where(external_provider_id: external_provider_id)
   }

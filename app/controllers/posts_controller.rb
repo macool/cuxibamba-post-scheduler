@@ -12,7 +12,6 @@ class PostsController < ApplicationController
   def new
     semantic_breadcrumb :new, :new_post_path
     @post = Post.new
-    post_policy = policy(@post)
     unless post_policy.new?
       flash[:error] = t(
         "ui.post.not_allowed",
@@ -24,17 +23,24 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-    authorize @post
-    if @post.save
+    if post_policy.create? && @post.save
       flash[:success] = t("ui.post.created", date: @post.share_at.to_s)
       redirect_to action: :index
     else
-      flash[:error] = t("ui.post.cant_create", reason: @post.errors.full_messages.join(", "))
+      post_policy.load_errors_in_post!
+      flash[:error] = t(
+        "ui.post.cant_create",
+        reason: @post.errors.messages.values.flatten.join(", ")
+      )
       render :new
     end
   end
 
   private
+
+  def post_policy
+    @post_policy ||= policy(@post)
+  end
 
   def mapped_external_providers
     Wuxi::ExternalProvider.all.map do |external_provider|

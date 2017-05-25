@@ -1,7 +1,7 @@
 currentIntroSwitchable = null
 
 class MainIntroSwitchable
-  timing: 5*1000
+  timing: 3*1000
   nextSwitchable: 0
 
   constructor: (@$selector) ->

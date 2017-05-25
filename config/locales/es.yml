@@ -103,6 +103,8 @@ es:
           attributes:
             content:
               blank: no puede estar vacío
+            share_at:
+              already_scheduled_for_date: ya tienes programada una publicación para la fecha %{date}
     attributes:
       post:
         content: Contenido de la publicación
