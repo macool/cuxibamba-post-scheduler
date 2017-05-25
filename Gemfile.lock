@@ -49,6 +49,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
+    airbrake (4.3.8)
+      builder
+      multi_json
     airbrussh (1.2.0)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (7.1.4)
@@ -284,6 +287,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeresource
+  airbrake (~> 4.3)
   byebug
   cached_resource
   capistrano (~> 3.8)
@@ -318,4 +322,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.14.6
+   1.15.0
