@@ -15,7 +15,7 @@ es:
   devise:
     failure:
       user:
-        unauthenticated: ups! por favor inicia sesión
+        unauthenticated: ups! por favor autentifica tu cuenta
   posts:
     post:
       reposted_at: publicado hace
@@ -36,6 +36,8 @@ es:
   post_visits:
     show:
       post_not_published_warning: atención, este post no ha sido publicado aún
+      cta_message_1: "%{nickname} programó esta publicación."
+      cta_message_2: "¡Tú también puedes publicar de manera gratuita!"
   home:
     welcome:
       header: bienvenido!

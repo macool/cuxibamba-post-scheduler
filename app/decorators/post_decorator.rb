@@ -59,7 +59,10 @@ class PostDecorator < ApplicationDecorator
   end
 
   def parsed_content
-    markdown(content).chomp
+    h.auto_link(
+      markdown(content).chomp,
+      html: { target: '_blank' }
+    )
   end
 
   def stripped_content(max_length: TWITTER_MAX_LENGTH)
@@ -69,6 +72,13 @@ class PostDecorator < ApplicationDecorator
       separator: ' ',
       omission: '..'
     )
+  end
+
+  def target_link_host
+    uri = URI.parse(target_link)
+    uri.host
+  rescue
+    target_link
   end
 
   private

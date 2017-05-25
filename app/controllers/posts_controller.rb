@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   end
 
   def mapped_external_providers
-    Wuxi::ExternalProvider.all.map do |external_provider|
+    Wuxi::ExternalProvider.active_for_api.map do |external_provider|
       [ external_provider.place, external_provider.id ]
     end
   end

@@ -9,9 +9,21 @@
     .content
       .summary
         = @post.user.name
-        .date = @post.share_at
+        .date
+          => "@#{@post.user.nickname}"
+          ' ·
+          = @post.share_at
       .extra.text.content
         = @post.parsed_content.html_safe
       - if @post.target_link.present?
         .extra.text
           = link_to @post.target_link, @post.target_link, target: "_blank"
+
+hr.post-show-separator
+
+= link_to new_post_path,
+          class: "ui message icon no-posts-message" do
+  .content
+    p = t(".cta_message_1", nickname: "@#{@post.user.nickname}")
+    p = t(".cta_message_2")
+  = render "posts/new_post_btn"
