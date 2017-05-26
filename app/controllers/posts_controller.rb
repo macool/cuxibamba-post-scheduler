@@ -62,7 +62,9 @@ class PostsController < ApplicationController
       :share_at,
       :content,
       :external_provider_id,
-      :target_link
+      :target_link,
+      :banner,
+      :banner_cache
     )
   end
 end

@@ -49,6 +49,7 @@ gem 'kramdown'
 gem 'dotenv-rails'
 gem 'airbrake', '~> 4.3'
 gem 'rails_autolink'
+gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

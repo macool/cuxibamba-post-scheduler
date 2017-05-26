@@ -20,7 +20,8 @@ class PostDecorator < ApplicationDecorator
       external_provider_id: object.external_provider_id,
       repost_content: repost_content,
       tweet_id: object.tweet_id,
-      published_at: object.published_at
+      published_at: object.published_at,
+      banner_url: object.banner_url
     }
   end
 

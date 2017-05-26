@@ -24,6 +24,11 @@
       = f.text_field :target_link,
                      placeholder: t(".target_link")
 
+    .field
+      label = t('.banner_placeholder')
+      = f.file_field :banner
+      = f.hidden_field :banner_cache
+
     .form-actions
       / TODO build preview?
         = link_to t('.preview'),

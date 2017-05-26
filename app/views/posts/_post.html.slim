@@ -8,6 +8,12 @@
         = post.share_at
     .extra.text.content
       = post.stripped_content.html_safe
+
+    - if post.banner?
+      .extra.images
+        = link_to post.sharing_url do
+          = image_tag post.banner_url
+
     - if post.target_link.present?
       .extra.text
         = link_to post.target_link_host, post.sharing_url, target: "_blank"

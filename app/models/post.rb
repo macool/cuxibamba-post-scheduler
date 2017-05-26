@@ -14,6 +14,7 @@ class Post
   field :tweet_id, type: String
   field :target_link, type: String
   field :external_provider_id, type: String
+  field :banner, type: String
 
   belongs_to :user
   has_many :post_visits
@@ -21,6 +22,8 @@ class Post
   index({ published_at: 1 })
   index({ tweet_id: 1 }, { unique: true })
   index({ created_at: 1 }, { background: true })
+
+  mount_uploader :banner, PostBannerUploader
 
   validates :content,
             :external_provider_id,

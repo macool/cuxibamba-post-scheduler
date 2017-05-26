@@ -33,6 +33,7 @@ es:
       preview: previsualizar
       submit_form: programar publicación
       target_link: 'enlace objetivo (opcional)'
+      banner_placeholder: banner o imagen (opcional)
   post_visits:
     show:
       post_not_published_warning: atención, este post no ha sido publicado aún
@@ -49,6 +50,7 @@ es:
         - ampliamos la audiencia de
         - transportamos
         - ponemos esteroides a
+        - medimos el impacto de
         - hacemos eco de
   datetime:
     distance_in_words:
