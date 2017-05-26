@@ -24,7 +24,7 @@
         .extra.text
           = link_to @post.target_link, @post.target_link, target: "_blank"
 
-- if @post.user.plan.standard?
+- if @post.user.plan.standard? || @post.user.display_ads
   hr.post-show-separator
 
   = link_to new_post_path,

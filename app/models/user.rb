@@ -13,6 +13,7 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
   field :plan,               type: String
+  field :display_ads,        type: Boolean
 
   enumerize :plan, in: [:standard, :premium], default: :standard
 
