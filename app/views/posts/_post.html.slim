@@ -16,7 +16,7 @@
 
     - if post.target_link.present?
       .extra.text
-        = link_to post.target_link_host, post.sharing_url, target: "_blank"
+        = link_to post.target_link_host, post.sharing_url
 
     .meta
       = link_to post.decorated_external_provider.external_link,
