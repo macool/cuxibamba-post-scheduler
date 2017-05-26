@@ -113,6 +113,7 @@ es:
     attributes:
       post:
         content: Contenido de la publicación
+        auto_follow_link: seguir enlace automáticamente
   errors:
     messages:
       domain_taken: "%{value} ya ha sido tomado"

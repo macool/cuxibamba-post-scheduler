@@ -7,7 +7,7 @@ class PostVisitsController < ApplicationController
 
     @post = @post.decorate
 
-    if @user.plan.premium? && @post.target_link.present?
+    if @user.plan.premium? && @post.target_link.present? && @post.auto_follow_link
       redirect_to @post.target_link
     end
   end

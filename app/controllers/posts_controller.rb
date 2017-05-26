@@ -64,7 +64,8 @@ class PostsController < ApplicationController
       :external_provider_id,
       :target_link,
       :banner,
-      :banner_cache
+      :banner_cache,
+      :auto_follow_link
     )
   end
 end

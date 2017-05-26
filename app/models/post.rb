@@ -15,6 +15,7 @@ class Post
   field :target_link, type: String
   field :external_provider_id, type: String
   field :banner, type: String
+  field :auto_follow_link, type: Boolean
 
   belongs_to :user
   has_many :post_visits
