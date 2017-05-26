@@ -51,7 +51,7 @@ class PostDecorator < ApplicationDecorator
     host = Rails.application.secrets.app_url
     host + h.consume_post_visit_path(
       post_id: id,
-      user_id: user.id
+      user_id: user.slug
     )
   end
 

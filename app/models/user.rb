@@ -14,16 +14,28 @@ class User
   field :last_sign_in_ip,    type: String
   field :plan,               type: String
   field :display_ads,        type: Boolean
+  field :slug,               type: String
 
   enumerize :plan, in: [:standard, :premium], default: :standard
 
   index({ uid: 1 }, { unique: true })
+  index({ slug: 1 }, { unique: true })
 
   has_many :posts
+
+  before_create :set_slug!
 
   def self.from_omniauth(auth)
     where(uid: auth.uid).first_or_create do |user|
       user.info = auth.info
     end
+  end
+
+  private
+
+  def set_slug!
+    ##
+    # use babosa gem
+    self.slug = info["nickname"].to_slug.normalize.to_s
   end
 end

@@ -1,6 +1,6 @@
 class PostVisitsController < ApplicationController
   def show
-    @user = User.find params[:user_id]
+    @user = get_user
     @post = @user.posts.find params[:post_id]
 
     log_visit!
@@ -13,6 +13,16 @@ class PostVisitsController < ApplicationController
   end
 
   private
+
+  def get_user
+    ##
+    # attempt to get by slug
+    return User.find_by slug: params[:user_id]
+  rescue Mongoid::Errors::DocumentNotFound
+    ##
+    # or fallback to id
+    User.find params[:user_id]
+  end
 
   def log_visit!
     if session[:visited_posts] && session[:visited_posts].include?(@post.id.to_s)

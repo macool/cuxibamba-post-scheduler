@@ -50,6 +50,7 @@ gem 'dotenv-rails'
 gem 'airbrake', '~> 4.3'
 gem 'rails_autolink'
 gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
+gem 'babosa'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
