@@ -1,4 +1,5 @@
 $(document).on 'turbolinks:load', (event) ->
   if typeof ga is 'function'
-    ga('set', 'location', event.data.url)
+    originalEvent = event.originalEvent
+    ga('set', 'location', originalEvent.data.url)
     ga('send', 'pageview')
