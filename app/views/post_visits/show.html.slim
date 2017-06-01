@@ -5,12 +5,15 @@
 .ui.feed.post-show-view
   .event
     .label
-      = image_tag @post.user.image
+      = @post.user.twitter_profile_link do
+        = image_tag @post.user.image
     .content
       .summary
-        = @post.user.name
+        = @post.user.twitter_profile_link do
+          = @post.user.name
         .date
-          => "@#{@post.user.nickname}"
+          => @post.user.twitter_profile_link do
+            = "@#{@post.user.nickname}"
           ' ·
           = @post.share_at
       .extra.text.content
@@ -23,6 +26,12 @@
       - if @post.target_link.present?
         .extra.text
           = link_to @post.target_link, @post.target_link, target: "_blank"
+
+- if policy(@post).edit?
+  .form-actions
+    = link_to t(".edit_post"),
+              edit_post_path(@post),
+              class: "ui button basic"
 
 - if @post.user.plan.standard? || @post.user.display_ads
   hr.post-show-separator

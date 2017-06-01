@@ -3,6 +3,7 @@ class PostVisitsController < ApplicationController
     @user = get_user
     @post = @user.posts.find params[:post_id]
 
+    add_breadcrumbs!
     log_visit!
 
     @post = @post.decorate
@@ -13,6 +14,13 @@ class PostVisitsController < ApplicationController
   end
 
   private
+
+  def add_breadcrumbs!
+    if current_user
+      semantic_breadcrumb :posts, :posts_path
+      semantic_breadcrumb @post, :posts_path
+    end
+  end
 
   def get_user
     ##

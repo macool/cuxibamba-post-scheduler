@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!,
                 only: [:index, :new, :create]
+  before_action :find_post,
+                only: [:edit, :update, :destroy]
 
   semantic_breadcrumb :index, :posts_path
 
@@ -21,8 +23,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    authorize @post
+    semantic_breadcrumb @post, @post.decorate.sharing_url
+    semantic_breadcrumb :edit, :edit_post_path
+  end
+
   def create
-    @post = current_user.posts.new(post_params)
+    @post = current_user.posts.new(permitted_attributes(@post))
     if post_policy.create? && @post.save
       flash[:success] = t("ui.post.created", date: @post.share_at.to_s)
       redirect_to action: :index
@@ -36,8 +44,17 @@ class PostsController < ApplicationController
     end
   end
 
+  def update
+    authorize @post
+    if @post.update(permitted_attributes(@post))
+      flash[:success] = t("ui.post.updated")
+      redirect_to @post.decorate.sharing_url
+    else
+      render :edit
+    end
+  end
+
   def destroy
-    @post = current_user.posts.find(params[:id])
     authorize @post
     @post.destroy
     flash[:success] = t("ui.post.destroyed")
@@ -46,26 +63,18 @@ class PostsController < ApplicationController
 
   private
 
+  def find_post
+    @post = policy_scope(Post).find(params[:id])
+  end
+
   def post_policy
     @post_policy ||= policy(@post)
   end
 
   def mapped_external_providers
     Wuxi::ExternalProvider.active_for_api.map do |external_provider|
-      [ external_provider.place, external_provider.id ]
+      [ external_provider.place, external_provider.id.to_s ]
     end
   end
   helper_method :mapped_external_providers
-
-  def post_params
-    params.require(:post).permit(
-      :share_at,
-      :content,
-      :external_provider_id,
-      :target_link,
-      :banner,
-      :banner_cache,
-      :auto_follow_link
-    )
-  end
 end

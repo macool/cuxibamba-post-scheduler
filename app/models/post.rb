@@ -55,4 +55,8 @@ class Post
   def reposted?
     published_at.present?
   end
+
+  def to_s
+    "@#{user.decorate.nickname} - #{share_at}"
+  end
 end

@@ -35,6 +35,12 @@
         i.icon.child
         = post.visits_count
 
+      - if policy(post).edit?
+        span  ·
+        = link_to edit_post_path(post),
+                  class: "span" do
+          i.icon.edit
+
       - if policy(post).destroy?
         = link_to post_path(post),
                   method: :delete,

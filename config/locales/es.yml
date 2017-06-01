@@ -4,6 +4,7 @@ es:
     error:
       cant_authorize: Ups! algo salió mal
     post:
+      updated: publicación actualizada
       created: publicación programada para el %{date}
       destroyed: publicación eliminada
       cant_create: ups, error al crear:<br>%{reason}
@@ -12,6 +13,9 @@ es:
     posts:
       index: publicaciones
       new: nueva
+      edit: editar
+    post_visits:
+      posts: todas las publicaciones
   devise:
     failure:
       user:
@@ -27,15 +31,20 @@ es:
         message: ¡programa una publicación nueva!
     new:
       title: publicación nueva
+    edit:
+      title: editar publicación
+    form:
       external_provider: lugar de publicación
       content: contenido de la publicación (soporta markdown)
       share_at: fecha de publicación
       preview: previsualizar
-      submit_form: programar publicación
       target_link: 'enlace objetivo (opcional)'
-      banner_placeholder: banner o imagen (opcional)
+      new_banner_placeholder: banner o imagen (opcional)
+      create: programar publicación
+      update: actualizar publicación
   post_visits:
     show:
+      edit_post: editar
       post_not_published_warning: atención, este post no ha sido publicado aún
       cta_message_1: "%{nickname} programó esta publicación."
       cta_message_2: "¡Tú también puedes publicar de manera gratuita!"
@@ -112,8 +121,9 @@ es:
               already_scheduled_for_date: ya tienes programada una publicación para la fecha %{date}
     attributes:
       post:
-        content: Contenido de la publicación
+        content: contenido de la publicación
         auto_follow_link: seguir enlace automáticamente
+        remove_banner: eliminar banner
   errors:
     messages:
       domain_taken: "%{value} ya ha sido tomado"

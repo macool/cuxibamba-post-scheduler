@@ -77,7 +77,7 @@ class PostDecorator < ApplicationDecorator
 
   def target_link_host
     uri = URI.parse(target_link)
-    uri.host
+    uri.host + uri.path
   rescue
     target_link
   end

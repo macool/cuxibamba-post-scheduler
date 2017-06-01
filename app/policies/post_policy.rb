@@ -1,4 +1,10 @@
 class PostPolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      scope.where(user_id: user.id)
+    end
+  end
+
   MAX_POSTS_ALLOWED_FOR_STANDARD_USER = 10
 
   def new?
@@ -11,6 +17,14 @@ class PostPolicy < ApplicationPolicy
     )
   end
 
+  def edit?
+    !record.reposted? && owned_by_user?
+  end
+
+  def update?
+    edit?
+  end
+
   def destroy?
     !record.reposted? && owned_by_user?
   end
@@ -19,6 +33,22 @@ class PostPolicy < ApplicationPolicy
     if already_scheduled_for_date?
       record.errors.add(:share_at, :already_scheduled_for_date, date: record.share_at.to_date)
     end
+  end
+
+  def permitted_attributes
+    base = [
+      :share_at,
+      :content,
+      :external_provider_id,
+      :target_link,
+      :banner,
+      :banner_cache,
+      :remove_banner
+    ]
+    if user.plan.premium?
+      base << :auto_follow_link
+    end
+    base
   end
 
   private

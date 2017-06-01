@@ -1,0 +1,47 @@
+= form_for @post, html: { class: "ui form" } do |f|
+  .field
+    = f.select :external_provider_id,
+               mapped_external_providers,
+               { include_blank: t('.external_provider') },
+               required: true
+
+  .field
+    = f.text_area :content,
+                  placeholder: t(".content"),
+                  required: true,
+                  rows: 5
+
+  .field
+    = f.date_field :share_at,
+                   placeholder: t(".share_at"),
+                   required: true,
+                   min: Date.tomorrow
+
+  .field
+    = f.text_field :target_link,
+                   placeholder: t(".target_link")
+
+  - if current_user.plan.premium? || true
+    .field.field-middle-align
+      = f.label :auto_follow_link, class: "inline-label"
+      = f.check_box :auto_follow_link
+
+  - if f.object.banner?
+    = image_tag f.object.banner_url, class: "banner-preview"
+    .field.field-middle-align
+      = f.label :remove_banner, class: "inline-label"
+      = f.check_box :remove_banner
+
+  .field
+    = f.label :banner, t('.new_banner_placeholder')
+    = f.file_field :banner
+    = f.hidden_field :banner_cache
+
+  .form-actions
+    / TODO build preview?
+      = link_to t('.preview'),
+                '#',
+                class: "ui basic button"
+
+    = f.submit f.object.new_record? ? t('.create') : t('.update'),
+               class: "ui primary button"
