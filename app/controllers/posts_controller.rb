@@ -30,7 +30,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(permitted_attributes(@post))
+    @post = current_user.posts.new(
+      policy_scope(Post).permitted_attributes
+    )
     if post_policy.create? && @post.save
       flash[:success] = t("ui.post.created", date: @post.share_at.to_s)
       redirect_to action: :index
