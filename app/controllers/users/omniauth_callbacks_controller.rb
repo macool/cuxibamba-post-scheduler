@@ -1,6 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def twitter
     @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user.cache_image!
     flash[:success] = I18n.t(
       "ui.welcome",
       name: "@#{@user.info["nickname"]}"

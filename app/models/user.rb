@@ -15,6 +15,7 @@ class User
   field :plan,               type: String
   field :display_ads,        type: Boolean
   field :slug,               type: String
+  field :image,              type: String
 
   enumerize :plan, in: [:standard, :premium], default: :standard
 
@@ -24,6 +25,9 @@ class User
   has_many :posts
 
   before_create :set_slug!
+  before_create :set_image!
+
+  mount_uploader :image, UserImageUploader
 
   def self.from_omniauth(auth)
     where(uid: auth.uid).first_or_create do |user|
@@ -31,7 +35,16 @@ class User
     end
   end
 
+  def cache_image!
+    set_image!
+    save!
+  end
+
   private
+
+  def set_image!
+    self.remote_image_url = info["image"]
+  end
 
   def set_slug!
     ##

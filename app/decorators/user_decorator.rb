@@ -1,6 +1,6 @@
 class UserDecorator < ApplicationDecorator
   def image
-    object.info["image"]
+    object.image
   end
 
   def name
