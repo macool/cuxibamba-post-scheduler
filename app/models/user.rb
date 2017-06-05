@@ -22,6 +22,7 @@ class User
   index({ uid: 1 }, { unique: true })
   index({ slug: 1 }, { unique: true })
 
+  has_one :admin
   has_many :posts
 
   before_create :set_slug!
@@ -38,6 +39,10 @@ class User
   def cache_image!
     set_image!
     save!
+  end
+
+  def is_admin?
+    admin.present?
   end
 
   private

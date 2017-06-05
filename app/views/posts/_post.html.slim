@@ -46,3 +46,10 @@
                   method: :delete,
                   class: "span" do
           i.icon.trash
+
+      - if policy(post).highlight?
+        span  ·
+        = link_to toggle_highlight_admin_post_path(post),
+                  class: "span",
+                  method: :post do
+          i.icon.thumbs.outline class="#{post.highlight ? 'up' : 'down'}"

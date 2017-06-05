@@ -3,6 +3,14 @@ class PostPolicy < ApplicationPolicy
     def resolve
       scope.where(user_id: user.id)
     end
+
+    def latest_posts
+      if user.is_admin?
+        scope.published
+      else
+        scope.published.highlighted
+      end
+    end
   end
 
   MAX_POSTS_ALLOWED_FOR_STANDARD_USER = 10
@@ -27,6 +35,10 @@ class PostPolicy < ApplicationPolicy
 
   def destroy?
     !record.reposted? && owned_by_user?
+  end
+
+  def highlight?
+    user.is_admin?
   end
 
   def load_errors_in_post!

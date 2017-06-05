@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
   def index
     @future_posts = Post.unpublished.fifo.from_user(current_user).decorate
-    @latest_posts = Post.published.last_published.decorate
+    @latest_posts = get_latest_posts
   end
 
   def new
@@ -64,6 +64,11 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def get_latest_posts
+    scope = PostPolicy::Scope.new(current_user, Post)
+    scope.latest_posts.last_published.decorate
+  end
 
   def find_post
     @post = policy_scope(Post).find(params[:id])

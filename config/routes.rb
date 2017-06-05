@@ -8,6 +8,13 @@ Rails.application.routes.draw do
     resources :posts,
               only: [:index, :show, :update]
   end
+  namespace :admin do
+    resources :posts, only: [] do
+      member do
+        post :toggle_highlight
+      end
+    end
+  end
   resource :post_visit, path: 'v', only: [] do
     get ':user_id/:post_id', action: :show, as: :consume
   end

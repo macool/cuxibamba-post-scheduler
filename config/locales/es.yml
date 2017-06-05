@@ -25,7 +25,7 @@ es:
       reposted_at: publicado hace
     index:
       future_posts: programadas
-      latest_posts: publicadas recientemente
+      latest_posts: lo más visto
       future_posts_suggestion:
         title: no has creado publicaciones
         message: ¡programa una publicación nueva!
