@@ -4,6 +4,9 @@ class HomeController < ApplicationController
   def welcome
   end
 
+  def howto
+  end
+
   private
 
   def redirect_to_posts_if_current_user

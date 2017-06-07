@@ -7,7 +7,10 @@
   p.login-section
     = link_to user_twitter_omniauth_authorize_path do
       i.icon.twitter
-      span = t('.login')
+      span = t('home.welcome.login')
 
   p.login-small-captions
     ' (sólo necesitamos saber quién eres)
+
+  p.howto-wrapper
+    = link_to "¿cómo funciona?", howto_path

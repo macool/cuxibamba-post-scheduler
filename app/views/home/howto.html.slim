@@ -1,0 +1,47 @@
+.welcome-page.howto-page
+  h1 ¿cómo funciona?
+
+  ul.left-aligned
+    li
+      .fake-bullet 1.
+      p
+        'selecciona
+        strong
+          ' dónde
+        ' deseas publicar
+    li
+      .fake-bullet 2.
+      p
+        ' indica
+        strong
+          ' cuándo
+        ' quieres compartir tu publicación
+    li
+      .fake-bullet 3.
+      p
+        strong
+          ' ingresa
+        ' con tu cuenta de twitter
+
+  ul.left-aligned.bottom-section
+    li
+      .fake-bullet *
+      p
+        ' nunca publicaremos en tu nombre; pedimos permisos de
+        strong
+          ' sólo-lectura
+        ' en twitter
+    li
+      .fake-bullet
+        ' **
+      p
+        | te ayudaremos a transmitir tus publicaciones, ¡no olivdes darles "
+        strong me gusta
+        ' " y
+        strong RT
+        ' !, de esta manera alcanzarán a más personas
+
+  p.login-section
+    = link_to user_twitter_omniauth_authorize_path do
+      i.icon.twitter
+      span = t('.cta')

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resource :post_visit, path: 'v', only: [] do
     get ':user_id/:post_id', action: :show, as: :consume
   end
+  get "/howto", to: 'home#howto', as: :howto
   root "home#welcome"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

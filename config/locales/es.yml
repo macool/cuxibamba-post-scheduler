@@ -49,6 +49,8 @@ es:
       cta_message_1: "%{nickname} programó esta publicación."
       cta_message_2: "¡Tú también puedes publicar de manera gratuita!"
   home:
+    howto:
+      cta: publicar
     welcome:
       header: bienvenido!
       main_intro: "<span class='switchable'>hacemos eco de</span> tus publicaciones"
