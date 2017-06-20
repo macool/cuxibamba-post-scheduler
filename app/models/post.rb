@@ -22,7 +22,7 @@ class Post
   has_many :post_visits
 
   index({ published_at: 1 })
-  index({ tweet_id: 1 }, { unique: true })
+  index({ tweet_id: 1 })
   index({ created_at: 1 }, { background: true })
   index({ highlight: 1 })
 
@@ -33,6 +33,7 @@ class Post
             presence: true
   validates :share_at, presence: true
   validates :share_at, future: true, if: "!reposted?"
+  validates :tweet_id, uniqueness: true, allow_nil: true
 
   scope :fifo, -> { order(created_at: :asc) }
   scope :published, -> { where(:published_at.ne => nil) }
