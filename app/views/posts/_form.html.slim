@@ -37,6 +37,20 @@
     = f.file_field :banner
     = f.hidden_field :banner_cache
 
+  .field.field-middle-align
+    = f.label :format_md, t('.format_md_content'), class: "inline-label"
+    = f.check_box :format_md
+
+  .ui.message.post-parsed-content-preview-wrapper data-path=preview_md_content_posts_path class="#{'hidden' if !f.object.format_md?}"
+    .content
+      - if f.object.persisted?
+        = f.object.decorate.parsed_content.html_safe
+
+    .preview-alert-message
+      i.notched.circle.loading.icon.hidden
+      i.icon.info.circle
+      = t('.md_content_preview_alert')
+
   .form-actions
     / TODO build preview?
       = link_to t('.preview'),

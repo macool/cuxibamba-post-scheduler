@@ -55,7 +55,8 @@ class PostPolicy < ApplicationPolicy
       :target_link,
       :banner,
       :banner_cache,
-      :remove_banner
+      :remove_banner,
+      :format_md
     ]
     if user.plan.premium?
       base << :auto_follow_link

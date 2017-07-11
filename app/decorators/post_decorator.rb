@@ -60,10 +60,14 @@ class PostDecorator < ApplicationDecorator
   end
 
   def parsed_content
-    h.auto_link(
-      markdown(content).chomp,
-      html: { target: '_blank' }
-    )
+    if object.format_md?
+      h.auto_link(
+        markdown(content).chomp,
+        html: { target: '_blank' }
+      )
+    else
+      content
+    end
   end
 
   def stripped_content(max_length: TWITTER_MAX_LENGTH)

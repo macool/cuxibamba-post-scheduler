@@ -63,6 +63,11 @@ class PostsController < ApplicationController
     redirect_to action: :index
   end
 
+  def preview_md_content
+    content = Post.new(content: params[:value]).decorate.parsed_content
+    render text: content
+  end
+
   private
 
   def get_latest_posts

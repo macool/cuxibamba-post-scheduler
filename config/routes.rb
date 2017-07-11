@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :posts
+  resources :posts do
+    collection do
+      post :preview_md_content
+    end
+  end
   devise_for :users,
              controllers: {
                omniauth_callbacks: "users/omniauth_callbacks"

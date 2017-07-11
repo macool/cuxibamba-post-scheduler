@@ -35,6 +35,8 @@ $bodyColor: rgba(0, 0, 0, 0.87)
   .content
     & > p
       white-space: pre-line
+    &.no-markdown
+      white-space: pre-line
   .extra.images
     text-align: center
     img
@@ -48,3 +50,13 @@ $bodyColor: rgba(0, 0, 0, 0.87)
 .banner-preview
   max-width: 100%
   margin: auto
+
+.preview-alert-message
+  position: absolute
+  z-index: 1
+  right: 5px
+
+.post-parsed-content-preview-wrapper
+  padding-bottom: 2em !important
+  max-height: 190px
+  overflow: auto

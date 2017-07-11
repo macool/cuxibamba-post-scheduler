@@ -17,6 +17,7 @@ class Post
   field :banner, type: String
   field :auto_follow_link, type: Boolean
   field :highlight, type: Boolean, default: true
+  field :format_md, type: Boolean, default: true
 
   belongs_to :user
   has_many :post_visits

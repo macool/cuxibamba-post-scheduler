@@ -16,7 +16,7 @@
             = "@#{@post.user.nickname}"
           ' ·
           = @post.share_at
-      .extra.text.content
+      .extra.text.content class="#{'no-markdown' if !@post.format_md?}"
         = @post.parsed_content.html_safe
 
       - if @post.banner?

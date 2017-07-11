@@ -42,6 +42,8 @@ es:
       new_banner_placeholder: banner o imagen (opcional)
       create: programar publicación
       update: actualizar publicación
+      format_md_content: formatear contenido con markdown
+      md_content_preview_alert: vista previa del contenido formateado
   post_visits:
     show:
       edit_post: editar
