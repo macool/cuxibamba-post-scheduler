@@ -50,6 +50,7 @@ gem 'dotenv-rails'
 gem 'airbrake', '~> 4.3'
 gem 'rails_autolink'
 gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
+gem 'mini_magick'
 gem 'babosa'
 
 group :development, :test do
