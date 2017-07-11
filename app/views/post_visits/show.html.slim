@@ -21,7 +21,7 @@
 
       - if @post.banner?
         .extra.images
-          = image_tag @post.banner_url
+          = image_tag @post.banner.normal.url
 
       - if @post.target_link.present?
         .extra.text
