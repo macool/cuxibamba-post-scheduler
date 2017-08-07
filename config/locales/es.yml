@@ -1,6 +1,7 @@
 es:
   ui:
     welcome: Bienvenido, %{name}
+    logout: cerrar sesión
     error:
       cant_authorize: Ups! algo salió mal
     post:
@@ -17,6 +18,9 @@ es:
     post_visits:
       posts: todas las publicaciones
   devise:
+    sessions:
+      user:
+        signed_out: adiós!
     failure:
       user:
         unauthenticated: ups! por favor autentifica tu cuenta

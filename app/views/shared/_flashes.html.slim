@@ -1,5 +1,6 @@
 .flash-messages.auto-noty
   - flash.each do |key, message|
     - key = (key == 'alert' ? 'warning' : key)
+    - key = (key == 'notice' ? 'info' : key)
     .flash-message data-kind="#{key}"
       = message.html_safe
