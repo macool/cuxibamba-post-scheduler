@@ -64,7 +64,8 @@ class PostsController < ApplicationController
   end
 
   def preview_md_content
-    content = Post.new(content: params[:value]).decorate.parsed_content
+    post = Post.new(format_md: true, content: params[:value])
+    content = post.decorate.parsed_content
     render text: content
   end
 
