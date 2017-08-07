@@ -22,8 +22,9 @@ class PostContentPreview
 lastValue = null
 
 textareaUpdated = ->
+  return unless $(formatMdSelector).is(":checked")
   newValue = lastValue != $.trim(@value)
-  if newValue && $(formatMdSelector).is(":checked")
+  if newValue
     lastValue = $.trim(@value)
     new PostContentPreview @value
 
@@ -32,6 +33,7 @@ debouncedTextareaUpdated = debounce textareaUpdated, 500
 formatMdChanged = ->
   methodName = if @checked then "show" else "hide"
   $(wrapperSelector)[methodName]()
+  $("textarea#post_content").trigger "keyup"
 
 $(document).on "keyup", "textarea#post_content", debouncedTextareaUpdated
 $(document).on "change", formatMdSelector, formatMdChanged
