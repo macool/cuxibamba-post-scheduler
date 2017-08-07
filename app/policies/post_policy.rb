@@ -1,7 +1,7 @@
 class PostPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.is_admin?
+      if user.present? && user.is_admin?
         scope
       else
         scope.where(user_id: user.id)
