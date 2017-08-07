@@ -30,7 +30,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def edit?
-    (owned_by_user? && !record.reposted?) || user.is_admin?
+    (owned_by_user? && !record.reposted?) || is_admin?
   end
 
   def update?
@@ -38,7 +38,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def destroy?
-    (owned_by_user? && !record.reposted?) || user.is_admin?
+    (owned_by_user? && !record.reposted?) || is_admin?
   end
 
   def highlight?
@@ -69,6 +69,10 @@ class PostPolicy < ApplicationPolicy
   end
 
   private
+
+  def is_admin?
+    user.present? && user.is_admin?
+  end
 
   def owned_by_user?
     record.user == user
