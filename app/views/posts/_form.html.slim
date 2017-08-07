@@ -18,7 +18,7 @@
     = f.date_field :share_at,
                    placeholder: t(".share_at"),
                    required: true,
-                   min: Date.tomorrow
+                   min: (f.object.reposted? ? f.object.published_at : Date.tomorrow)
 
   .field
     = f.label :target_link, t(".label.target_link")
