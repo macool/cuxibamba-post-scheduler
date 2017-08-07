@@ -1,12 +1,12 @@
 .event.post-view
-  .label
+  = link_to post.sharing_url, class: "label" do
     = image_tag post.user.image
   .content
-    .summary
+    = link_to post.sharing_url, class: "summary" do
       = post.user.name
-      = link_to post.sharing_url, class: "date" do
+      .date
         = post.share_at
-    .extra.text.content
+    = link_to post.sharing_url, class: "extra text content" do
       = post.stripped_content.html_safe
 
     - if post.banner?
