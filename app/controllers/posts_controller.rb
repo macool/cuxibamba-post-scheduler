@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
   def new
     semantic_breadcrumb :new, :new_post_path
-    @post = Post.new
+    @post = Post.new share_at: Date.tomorrow
     unless post_policy.new?
       flash[:error] = t(
         "ui.post.not_allowed",

@@ -48,6 +48,11 @@ es:
       update: actualizar publicación
       format_md_content: formatear contenido con markdown
       md_content_preview_alert: vista previa del contenido formateado
+      label:
+        external_provider_id: ¿dónde quieres publicar?
+        content: ¿qué quieres decir?
+        share_at: ¿cuándo quieres publicar?
+        target_link: ¿a dónde quieres dirigir a tus usuarios?
   post_visits:
     show:
       edit_post: editar

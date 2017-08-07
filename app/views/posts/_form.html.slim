@@ -1,23 +1,27 @@
 = form_for @post, html: { class: "ui form" } do |f|
   .field
+    = f.label :external_provider_id, t(".label.external_provider_id")
     = f.select :external_provider_id,
                mapped_external_providers,
                { include_blank: t('.external_provider') },
                required: true
 
   .field
+    = f.label :content, t(".label.content")
     = f.text_area :content,
                   placeholder: t(".content"),
                   required: true,
                   rows: 5
 
   .field
+    = f.label :share_at, t(".label.share_at")
     = f.date_field :share_at,
                    placeholder: t(".share_at"),
                    required: true,
                    min: Date.tomorrow
 
   .field
+    = f.label :target_link, t(".label.target_link")
     = f.text_field :target_link,
                    placeholder: t(".target_link")
 
@@ -41,7 +45,7 @@
     = f.label :format_md, t('.format_md_content'), class: "inline-label"
     = f.check_box :format_md
 
-  .ui.message.post-parsed-content-preview-wrapper data-path=preview_md_content_posts_path class="#{'hidden' if !f.object.format_md?}"
+  .ui.message.post-parsed-content-preview-wrapper data-path=preview_md_content_posts_path
     .content
       - if f.object.persisted?
         = f.object.decorate.parsed_content.html_safe

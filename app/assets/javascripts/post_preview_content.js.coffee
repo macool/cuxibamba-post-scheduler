@@ -37,3 +37,5 @@ formatMdChanged = ->
 
 $(document).on "keyup", "textarea#post_content", debouncedTextareaUpdated
 $(document).on "change", formatMdSelector, formatMdChanged
+$(document).on "turbolinks:load", ->
+  $(formatMdSelector).trigger "change"
