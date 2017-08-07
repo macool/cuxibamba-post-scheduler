@@ -81,8 +81,18 @@ class PostDecorator < ApplicationDecorator
 
   def target_link_host
     uri = URI.parse(target_link)
-    uri.host + uri.path
-  rescue
+    uri.host.to_s + uri.path.to_s
+  rescue URI::InvalidURIError
+    target_link
+  end
+
+  def target_link_with_scheme
+    uri = URI.parse(target_link)
+    if uri.scheme.blank?
+      scheme = 'http://'
+    end
+    scheme.to_s + uri.to_s
+  rescue URI::InvalidURIError
     target_link
   end
 
