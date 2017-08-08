@@ -42,7 +42,7 @@ es:
       content: contenido de la publicación (soporta markdown)
       share_at: fecha de publicación
       preview: previsualizar
-      target_link: 'enlace objetivo (opcional)'
+      target_link: 'www.misitioweb.com (opcional)'
       new_banner_placeholder: banner o imagen (opcional)
       create: programar publicación
       update: actualizar publicación
@@ -52,7 +52,7 @@ es:
         external_provider_id: ¿dónde quieres publicar?
         content: ¿qué quieres decir?
         share_at: ¿cuándo quieres publicar?
-        target_link: ¿a dónde quieres dirigir a tus usuarios?
+        target_link: ¿a dónde quieres direccionar tus usuarios?
   post_visits:
     show:
       edit_post: editar
