@@ -7,6 +7,14 @@ class PostDecorator < ApplicationDecorator
   SHARING_URL_LENGTH = 25
   TWITTER_MAX_LENGTH = 140
 
+  def user_or_guest
+    user.present? ? user : guest_user
+  end
+
+  def guest_user
+    GuestUserDecorator.new(GuestUser.new)
+  end
+
   def decorated_external_provider
     @decorated_external_provider ||= ::Wuxi::ExternalProviderDecorator.new(external_provider)
   end

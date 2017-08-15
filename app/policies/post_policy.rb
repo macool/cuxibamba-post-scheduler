@@ -20,7 +20,7 @@ class PostPolicy < ApplicationPolicy
   MAX_POSTS_ALLOWED_FOR_STANDARD_USER = 10
 
   def new?
-    create?
+    user.blank? || create?
   end
 
   def create?
@@ -62,7 +62,7 @@ class PostPolicy < ApplicationPolicy
       :remove_banner,
       :format_md
     ]
-    if user.plan.premium?
+    if user.present? && user.plan.premium?
       base << :auto_follow_link
     end
     base

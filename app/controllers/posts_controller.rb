@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!,
-                only: [:index, :new, :create]
+                only: [:index]
   before_action :find_post,
                 only: [:edit, :update, :destroy]
 
@@ -30,19 +30,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(
-      params.require(:post).permit(policy(Post).permitted_attributes)
-    )
-    if post_policy.create? && @post.save
-      flash[:success] = t("ui.post.created", date: @post.share_at.to_s)
-      redirect_to action: :index
+    if current_user.present?
+      create_as_user
     else
-      post_policy.load_errors_in_post!
-      flash[:error] = t(
-        "ui.post.cant_create",
-        reason: @post.errors.messages.values.flatten.join(", ")
-      )
-      render :new
+      build_as_guest
     end
   end
 
@@ -70,6 +61,46 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def build_as_guest
+    @post = Post.new(
+      params.require(:post).permit(policy(Post).permitted_attributes)
+    )
+    if @post.save
+      semantic_breadcrumb :build_as_guest
+      persist_to_session!
+      flash[:notice] = t("ui.post.created_as_guest", date: @post.share_at.to_s)
+      render :build_as_guest
+    else
+      cant_create_post
+    end
+  end
+
+  def persist_to_session!
+    session[:posted_as_guest] ||= []
+    session[:posted_as_guest] << @post.id.to_s
+  end
+
+  def create_as_user
+    @post = current_user.posts.new(
+      params.require(:post).permit(policy(Post).permitted_attributes)
+    )
+    if post_policy.create? && @post.save
+      flash[:success] = t("ui.post.created", date: @post.share_at.to_s)
+      redirect_to action: :index
+    else
+      post_policy.load_errors_in_post!
+      cant_create_post
+    end
+  end
+
+  def cant_create_post
+    flash[:error] = t(
+      "ui.post.cant_create",
+      reason: @post.errors.messages.values.flatten.join(", ")
+    )
+    render :new
+  end
 
   def get_latest_posts
     scope = PostPolicy::Scope.new(current_user, Post)

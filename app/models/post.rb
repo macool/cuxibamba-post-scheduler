@@ -19,7 +19,7 @@ class Post
   field :highlight, type: Boolean, default: true
   field :format_md, type: Boolean, default: false
 
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :post_visits
 
   index({ published_at: 1 })
@@ -42,6 +42,7 @@ class Post
   scope :repost_today, -> { for_date(Time.zone.now) }
   scope :highlighted, -> { where(highlight: true) }
   scope :for_date, ->(date) { where(share_at: date.to_date) }
+  scope :not_guest, ->{ where(:"user.ne" => nil) }
   scope :for_external_provider, ->(external_provider_id) {
     where(external_provider_id: external_provider_id)
   }

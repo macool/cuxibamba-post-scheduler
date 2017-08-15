@@ -14,7 +14,9 @@
     <%= render "shared/flashes" %>
 
     <div class="body-content-wrapper">
-      <%= semantic_breadcrumbs %>
+      <% if current_user.present? %>
+        <%= semantic_breadcrumbs %>
+      <% end %>
       <%= yield %>
     </div>
 

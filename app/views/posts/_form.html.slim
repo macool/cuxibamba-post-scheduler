@@ -25,7 +25,7 @@
     = f.text_field :target_link,
                    placeholder: t(".target_link")
 
-  - if current_user.plan.premium?
+  - if current_user.present? && current_user.plan.premium?
     .field.field-middle-align
       = f.label :auto_follow_link, class: "inline-label"
       = f.check_box :auto_follow_link
@@ -61,5 +61,6 @@
                 '#',
                 class: "ui basic button"
 
-    = f.submit f.object.new_record? ? t('.create') : t('.update'),
-               class: "ui primary button"
+    - text = current_user.blank? ? t('.preview') : nil
+    - text = text.presence || (f.object.new_record? ? t('.create') : t('.update'))
+    = f.submit text, class: "ui primary button"

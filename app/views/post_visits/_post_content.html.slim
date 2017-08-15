@@ -1,0 +1,25 @@
+.ui.feed.post-show-view
+  .event
+    .label
+      = post.user_or_guest.twitter_profile_link do
+        = image_tag post.user_or_guest.image
+    .content
+      .summary
+        = post.user_or_guest.twitter_profile_link do
+          = post.user_or_guest.name
+        .date
+          - if post.user.present?
+            => post.user.twitter_profile_link do
+              = "@#{post.user.nickname}"
+          ' ·
+          = post.share_at
+      .extra.text.content class="#{'no-markdown' if !post.format_md?}"
+        = post.parsed_content.html_safe
+
+      - if post.banner?
+        .extra.images
+          = image_tag post.banner.normal.url
+
+      - if post.target_link.present?
+        .extra.text
+          = link_to post.target_link, post.target_link_with_scheme, target: "_blank"

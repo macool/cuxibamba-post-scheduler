@@ -1,4 +1,6 @@
 es:
+  guest_user:
+    name: Usuario Invitado
   ui:
     welcome: Bienvenido, %{name}
     logout: cerrar sesión
@@ -7,6 +9,7 @@ es:
     post:
       updated: publicación actualizada
       created: publicación programada para el %{date}
+      created_as_guest: por favor autentifícate para programar esta publicación para el %{date}
       destroyed: publicación eliminada
       cant_create: ups, error al crear:<br>%{reason}
       not_allowed: ups! por ahora sólo puedes programar hasta %{count} publicaciones
@@ -15,6 +18,7 @@ es:
       index: publicaciones
       new: nueva
       edit: editar
+      build_as_guest: programar
     post_visits:
       posts: todas las publicaciones
   devise:
@@ -25,6 +29,11 @@ es:
       user:
         unauthenticated: ups! por favor autentifica tu cuenta
   posts:
+    build_as_guest:
+      notice:
+        title: Esta publicación aún no ha sido programada
+        message: Por favor autentifica tu cuenta de twitter para programar esta publicación
+        post_message: Si no autentificas tu cuenta, esta publicación será descartada
     post:
       reposted_at: publicado hace
     index:
@@ -46,6 +55,7 @@ es:
       new_banner_placeholder: banner o imagen (opcional)
       create: programar publicación
       update: actualizar publicación
+      preview: previsualizar publicación
       format_md_content: formatear contenido con markdown
       md_content_preview_alert: vista previa del contenido formateado
       label:

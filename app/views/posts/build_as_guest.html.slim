@@ -1,0 +1,26 @@
+.welcome-page
+  p.login-section
+    = link_to user_twitter_omniauth_authorize_path do
+      i.icon.twitter
+      span = t('home.welcome.login')
+
+= render "post_visits/post_content", post: @post.decorate
+
+.ui.section.divider
+
+= link_to user_twitter_omniauth_authorize_path,
+          class: "ui message info icon" do
+  i.icon.warning
+  .content
+    .header = t(".notice.title")
+    p = t(".notice.message")
+    p = t(".notice.post_message")
+
+.welcome-page
+  p.login-section
+    = link_to user_twitter_omniauth_authorize_path do
+      i.icon.twitter
+      span = t('home.welcome.login')
+
+  p.howto-wrapper
+    = link_to "¿cómo funciona?", howto_path

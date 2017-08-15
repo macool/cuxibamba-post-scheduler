@@ -34,6 +34,7 @@ class Api::PostsController < Api::BaseController
 
   def index_scope
     Post.fifo
+        .not_guest
         .unpublished
         .repost_today
         .for_external_provider(params[:external_provider_id])
