@@ -42,7 +42,7 @@ class Post
   scope :repost_today, -> { for_date(Time.zone.now) }
   scope :highlighted, -> { where(highlight: true) }
   scope :for_date, ->(date) { where(share_at: date.to_date) }
-  scope :not_guest, ->{ where(:"user.ne" => nil) }
+  scope :not_guest, ->{ where(:user.ne => nil) }
   scope :for_external_provider, ->(external_provider_id) {
     where(external_provider_id: external_provider_id)
   }
