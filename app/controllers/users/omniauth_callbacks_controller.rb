@@ -20,7 +20,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def persist_guest_posts!
     return if session[:posted_as_guest].blank?
     session[:posted_as_guest].each do |post_id|
-      Post.not_guest.find(post_id).update! user_id: @user.id
+      post = Post.not_guest.find_by(id: post_id)
+      if post.present?
+        post.update! user_id: @user.id
+      end
     end
     session[:posted_as_guest] = nil
   end
