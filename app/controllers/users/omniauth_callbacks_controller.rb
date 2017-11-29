@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def twitter
     @user = User.from_omniauth(request.env["omniauth.auth"])
     @user.cache_image!
-    persist_guest_posts!
+    persist_all_guest_posts!
     flash[:success] = I18n.t(
       "ui.welcome",
       name: "@#{@user.info["name"]}"
@@ -17,14 +17,21 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
-  def persist_guest_posts!
+  def persist_all_guest_posts!
     return if session[:posted_as_guest].blank?
     session[:posted_as_guest].each do |post_id|
-      post = Post.not_guest.find_by(id: post_id)
-      if post.present?
-        post.update! user_id: @user.id
-      end
+      persist_guest_post(post_id)
     end
     session[:posted_as_guest] = nil
+  end
+
+  def persist_guest_post(post_id)
+    begin
+      post = Post.not_guest.find(post_id)
+    rescue Mongoid::Errors::DocumentNotFound
+      # doing nothing if post not found
+    else
+      post.update! user_id: @user.id
+    end
   end
 end
