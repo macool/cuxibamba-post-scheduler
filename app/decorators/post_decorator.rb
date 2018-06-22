@@ -5,7 +5,7 @@ class PostDecorator < ApplicationDecorator
   # see t.co length
   # https://dev.twitter.com/basics/tco#will-t-co-wrapped-links-always-be-the-same-length
   SHARING_URL_LENGTH = 25
-  TWITTER_MAX_LENGTH = 140
+  TWITTER_MAX_LENGTH = 280
 
   def user_or_guest
     user.present? ? user : guest_user
